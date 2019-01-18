@@ -1,4 +1,9 @@
 List of sensors to be used in the project:
 
-1. ADXL 345 3-Axis Accelerometer
-2. HC-SR501 PIR Sensor Module
+- ADXL 345 3-Axis Accelerometer
+- HC-SR501 PIR Sensor Module
+
+Sensors we have access to if we need them:
+
+- VEML 6070 UV Index Sensor
+- INA 219 Current / Voltage Detector
