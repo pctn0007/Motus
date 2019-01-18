@@ -2,6 +2,8 @@ List of sensors to be used in the project:
 
 - ADXL 345 3-Axis Accelerometer
 - HC-SR501 PIR Sensor Module
+- Standard LED + 330 Ohm Resistor
+- PI Camera
 
 Sensors we have access to if we need them:
 
