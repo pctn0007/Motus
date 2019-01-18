@@ -1,0 +1,4 @@
+List of sensors to be used in the project:
+
+1. ADXL 345 3-Axis Accelerometer
+2. HC-SR501 PIR Sensor Module
