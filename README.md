@@ -7,3 +7,4 @@ Motus is a Student Project that is designed to be an Active Remote Security Syst
 <br>- Winston Vuong (LosesonWinson)
 
 <br><br>More to be added later.
+<br><br>I edited this line of text on the Raspberry Pi! ~Dariusz.
