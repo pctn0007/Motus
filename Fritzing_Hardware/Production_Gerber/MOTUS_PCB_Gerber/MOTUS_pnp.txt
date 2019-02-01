@@ -1,0 +1,53 @@
+*Pick And Place List
+*Company= MOTUS Capstone Project
+*Author= Dariusz Kulpinski
+*eMail= dariuszkulpinski@yahoo.com
+*
+*Project=MOTUS
+*Date=15:37:12
+*CreatedBy=Fritzing 0.9.3b.04.19.5c895d327c44a3114e5fcc9d8260daf0cbb52806
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;;3.51164;-36.9243;0;Bottom;Via1
+2;;;46.6916;-44.5443;0;Bottom;Via6
+3;;;29.7805;-19.1622;0;Top;TXT2
+4;;;70.8216;-30.5743;180;Bottom; 
+5;;;25.0731;-16.3071;0;Top;TXT2
+6;;;33.2253;-10.2017;0;Top;TXT16
+7;;;56.8516;-44.5443;0;Bottom;Via5
+8;;;64.7547;-41.1125;-90;Top;TXT13
+9;;;77.4926;-44.0535;-90;Top;TXT13
+10;;;28.2675;-61.9642;0;Bottom;TXT19
+11;;;51.7046;-38.8778;0;Top;TXT5
+12;;;66.8375;-61.163;0;Top;TXT15
+13;;;27.43;-21.6136;0;Top;TXT2
+14;;;45.3897;-17.2877;0;Top;TXT10
+15;;;10.05;-13.9888;0;Top;TXT3
+16;;;32.8402;-7.05494;0;Top;TXT17
+17;;;59.3631;-18.893;0;Top;TXT8
+18;;1206 [SMD];52.7616;-19.1443;0;Bottom; 
+19;;;79.887;-41.1125;-90;Top;TXT13
+20;;;70.9354;-21.7777;0;Top;TXT12
+21;;;16.2116;-34.3843;0;Bottom;Via3
+22;;;28.2819;-64.3531;0;Bottom;TXT18
+23;;;13.9108;-24.7429;0;Top;TXT4
+24;300;THT;51.7716;-31.8443;-90;Bottom; 
+25;;;8.59164;-44.5443;0;Bottom;Via7
+26;;;66.8603;-63.4994;0;Top;TXT14
+27;;;75.0774;-3.82233;0;Top;TXT6
+28;;;62.045;-41.0167;-90;Top;TXT13
+29;;THT;21.2916;-19.1443;0;Bottom; 
+30;;;42.664;-31.9374;0;Top;TXT11
+31;;;51.956;-24.4226;0;Top;TXT7
+32;;;8.59164;-29.3043;0;Bottom;Via9
+33;;;46.254;-19.0303;0;Top;TXT9
+34;;;42.7141;-28.5537;0;Bottom;Raspberry Pi 1
+35;;;6.05164;-31.8443;0;Bottom;Via2
+36;;;21.2916;-39.4643;0;Bottom;Via4
+37;;;14.553;-3.84593;0;Bottom;TXT20
+38;;;13.6716;-29.3043;0;Bottom;Via8
