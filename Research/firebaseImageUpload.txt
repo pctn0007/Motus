@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/40085677/how-to-upload-images-to-firebase-from-raspberry-pi
+https://github.com/PhantomInsights/firebase-python/tree/master/storage
