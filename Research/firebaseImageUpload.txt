@@ -2,3 +2,5 @@ https://stackoverflow.com/questions/40085677/how-to-upload-images-to-firebase-fr
 https://github.com/PhantomInsights/firebase-python/tree/master/storage
 
 https://stackoverflow.com/questions/42655719/firebase-upload-image-from-python-to-firebase-storage
+
+https://stackoverflow.com/questions/49526753/upload-image-file-to-firebase-in-python
