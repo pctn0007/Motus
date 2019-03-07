@@ -69,7 +69,7 @@ Once you obtain your circuit board, you can proceed to soldering on the pins. Pl
 [If you need help on soldering, a tutorial can be found here.](https://www.build-electronic-circuits.com/how-to-solder/)
 <br />To solder the board, ensure that the sensors pins are soldered on the BOTTOM of the board. Ensure that the PI connectors are soldered on the TOP of the board. To Solder the Vias, take some jumper wire, strip it of its protection and stick it throuhg the via. Solder the jumper on both ends, and cut off the excess. That solders on the via and you linked top to bottom.
 <br /> This is an example of how the soldering should be completed:
-![Soldering Example]()
+![Soldering Example](https://github.com/pctn0007/Motus/blob/master/BuildInstImages/solderedboard.jpg)
 Once the board is fully soldered, it's time to move to Phase 3.
 
 ## Phase 3: Powering the Accelerometer
