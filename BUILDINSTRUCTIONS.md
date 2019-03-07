@@ -47,10 +47,10 @@ Three connections are required to connect the motion sensor to the pi. We need a
 Two connections are required to connect the LED. A connection to the 5V pin, and to the ground. The Resistor can be connected inline with the LED anywhere.
 To connect the camera, simply slide the ribbon cable into the appropriate cable slot on the pi's board.
 Below is the breadboard. This is how it is supposed to be connected in the end:
-![Breadboard image]()
+![Breadboard image](https://github.com/pctn0007/Motus/blob/master/BuildInstImages/MOTUS_bb.jpg)
 #### Pin locations may vary depending on the manufacturer of the sensor itself.
 Basically in the end, your wiring must match the schematic as follows:
-![Wiring Schematic]()
+![Wiring Schematic](https://github.com/pctn0007/Motus/blob/master/BuildInstImages/MOTUS_schem.jpg)
 Once this breadboarding is complete, You have the option to jump towards the Third Phase of the build, which powers on the system, or continue on to the Second Phase to design the circuit board for actual system itself.
 
 ## Phase 2: Building a Circuit Board
@@ -60,7 +60,7 @@ With our breadboard schematic done, we can now design a circuit board that will 
 <br />Once fritzing is installed, build a breadboard design very similar to the design above. Once designed, a schematic of your board and a PCB template will automatically be generated. All you have to do is simply complete the connections.
 <br />For the PCB, make sure that each of the connections are designed to fit the devices, and ensure that they can be soldered on depending on which side the contacts are.
 <br />Below is a sample of how the PCB should look like in the end:
-![PCB Design]()
+![PCB Design](https://github.com/pctn0007/Motus/blob/master/BuildInstImages/MOTUS_pcb.jpg)
 <br />[Click here to learn more on how to design a PCB in Fritzing](http://fritzing.org/learning/tutorials/designing-pcb/)
 <br />Ensure that the connection to the Pi Header can be soldered on the TOP of the board, and make sure that soldering on the sensor can be done on the BOTTOM of the board. Remember, Yellow lines indicate the TOP, while orange lines indicate the BOTTOM. To connect the bottom and the top together, use VIA'S to link them together. You also have access to the original fritzing file if you want to modify that for yourself. [You can click here to download the fritzing file.](https://github.com/pctn0007/Motus/blob/master/Fritzing_Hardware/MOTUS.fzz)
 <br />If you are satisfied with the board design, export the PCB as an Extended Gerber File for manufacturing. If you have access to a PCB builder, you can use that. Otherwise, you need to send these Gerber files to a service that Prints out circuit boards, which may add to your budget.
