@@ -7,5 +7,4 @@ Motus is a Student Project that is designed to be an Active Remote Security Syst
 <br>- Winston Vuong (LosesonWinson)
 <br>- All three students are Computer Engineering Students currently studying at Humber College in Toronto, CAN.
 
-<br><br>More to be added later.
-<br><br>I edited this line of text on the Raspberry Pi! ~Dariusz.
+<br> [Click here to access the Build Instructions](https://github.com/pctn0007/Motus/blob/master/BUILDINSTRUCTIONS.md)
