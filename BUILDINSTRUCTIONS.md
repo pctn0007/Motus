@@ -108,7 +108,7 @@ It is important to note that once all setup is complete, you must alter your use
 
 ## Phase 5: The Enclosure
 
-Do do the enclosure is totally up to you, but it is highly reccomended so that your components are secured and protected. The example case for this project was made using CorelDraw. Other design softwares can be used as well to create the enclosure.
+To do the enclosure is totally up to you, but it is highly reccomended so that your components are secured and protected. The example case for this project was made using CorelDraw. Other design softwares can be used as well to create the enclosure.
 [This is a link to the example closure, which can be modified to your circuit design.]()
 NOTE: This is a coreldraw file, therefore you require coreldraw to edit this file. Unless you do not have a free trial, this may be an additional $600 CAD to the budget. Ridiculous price.
 <br />Once you design your enclosure for the circuit, you can take the file and use a locally available CO2 laser etcher or other tool that corresponds to your design. Otherwise you may also require to use a service which will build the enclosure for you, but at an added cost for the budget. Once you get your enclosure parts, build the entire thing together, and that is your final result. Below are images of an example of the final result:
