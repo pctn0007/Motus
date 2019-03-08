@@ -100,6 +100,11 @@ The next part is programming the device itself to take inputs from the sensors. 
 <br /> Feel free to look at the script, and modify it however you please.
 
 ## Phase 4: The Database and App
+The recommended database to use for this build is known as Google's Firebase realtime database and storage system. First, you must create a google account in order to register your application (via Android Studio) to your remote database. Next, we need to create a new project in Firebase by clicking Add Project under your Firebase Console. It is important to follow each setup step accordingly by importing the correct libraries into your application and project gradle files. It is also important to make sure you add the google-support.json file into your Android Studio application folder/directory. Once you have successfuly added your Android application to your database for connection, we must create a link between the application and the database for development. The video link below will provide a step-by-step tutorial on how to go about creating, adding and connecting your new Android project to your database:
+
+https://www.youtube.com/watch?v=YVu_xSzn2u0
+
+It is important to note that once all setup is complete, you must alter your user permissions accordingly in order to enable read and write privledges so that individuals working on the application have the ability to read/write data to the database.
 
 ## Phase 5: The Enclosure
 
