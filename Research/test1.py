@@ -17,6 +17,6 @@ zebraBlob.upload_from_filename(filename='zebra.jpg')
 
 
 # Download a file from your bucket.
-#giraffeBlob = bucket.get_blob('giraffe.jpg')
+#giraffeBlob = bucket.get_blob('zebra.jpg')
 #giraffeBlob.download_as_string()
 #In line client = storage.Client()
