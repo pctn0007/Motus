@@ -45,6 +45,10 @@ pic = 'SECURITYIMAGE.jpg' # snapshot file name
 							
 imagetosend = 'null' # initial image name
 						# RANDOMLY GENERATED THROUGH CODE
+			
+# Motion types (i.e. case motion vs. stimuli motion).
+MOTION_TYPE_I2C = '0' #case
+MOTION_TYPE_GPIO = '1' #stimuli
 
 # Get I2C bus
 bus = smbus.SMBus(1)
@@ -129,7 +133,8 @@ while True:
                 #DATABASE INSERTION
 				data = {'Uid': uid,
 						'Picture': pic,
-						'Date': dtime}
+						'Date': dtime,
+						'mType': MOTION_TYPE_I2C}
 				sent = json.dumps(data)
 				result = firebase.post('/Detections/' + boxid, data)
 				
@@ -184,7 +189,8 @@ while True:
                 #DATABASE INSERTION
 				data = {'Uid': uid,
 						'Picture': pic,
-						'Date': dtime}
+						'Date': dtime
+						'mType': MOTION_TYPE_GPIO}
 						
 				sent = json.dumps(data)
 				result = firebase.post('/Detections/' + boxid, data)
