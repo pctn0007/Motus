@@ -31,7 +31,7 @@ from time import gmtime, strftime
 sensitivity = 20 # The Accelerometers Sensetivity for Detection
                  # 0 = MAX Sensitivity | Any positive value = less sensitive
 
-sleeptime = 3.0 # Suspend Time after Security Trigger
+sleeptime = 20.0 # Suspend Time after Security Trigger
                  # SECONDS.MILLISECONDS
 				 
 boxid = 'm1'   # unique motus bo id
@@ -54,11 +54,11 @@ MOTION_TYPE_GPIO = '1' #stimuli
 bus = smbus.SMBus(1)
 
 # Get Firebase Connection
-firebase = firebase.FirebaseApplication('https://motus-e3989.firebaseio.com/', None)
-credential_path = "/home/pi/MOTUS.json"
+firebase = firebase.FirebaseApplication('https://exampleprog-69f69.firebaseio.com/', None)
+credential_path = "/home/pi/Exampleprog.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 client = storage.Client()
-bucket = client.get_bucket('motus-e3989.appspot.com')
+bucket = client.get_bucket('exampleprog-69f69.appspot.com')
 
 # Get GPIO devices
 GPIO.setmode(GPIO.BCM)
@@ -73,6 +73,7 @@ xAcclafter = 0   # Motion Defaults Set
 yAcclafter = 0   # For X , Y, Z
 zAcclafter = 0   # Axis'
 
+print("MOTUS is ready to defend. Waiting for event...")
 while True:
 
 # ADXL345 MOTION OBSERVATION LOGIC
@@ -117,44 +118,39 @@ while True:
            yChange >= sensitivity or yChange <= -sensitivity or
            zChange >= sensitivity or zChange <= -sensitivity):
             
-                print("MOVEMENT DETECTED ON THE DEVICE")
-				dtime = strftime("%d %b %Y %H:%M:%S +0000", gmtime()) # detection timestamp (formatted)
-                GPIO.output(17,GPIO.LOW)
-                time.sleep(0.4)
-                GPIO.output(17,GPIO.HIGH)
-                time.sleep(0.4)
-                GPIO.output(17,GPIO.LOW)
-                time.sleep(0.4)
-                GPIO.output(17,GPIO.HIGH)
+            print("MOVEMENT DETECTED ON THE DEVICE")
+            dtime = strftime("%d %b %Y %H:%M:%S", gmtime()) # detection timestamp
+            imagetosend = strftime("%d%b%Y_%H:%M:%S.jpg", gmtime())
+            GPIO.output(17,GPIO.LOW)
+            time.sleep(0.4)
+            GPIO.output(17,GPIO.HIGH)
+            time.sleep(0.4)
+            GPIO.output(17,GPIO.LOW)
+            time.sleep(0.4)
+            GPIO.output(17,GPIO.HIGH)
 				
-                #CAMERA CALL
-                os.system("./CAMERA.sh")
+            #CAMERA CALL
+            os.system("./CAMERA.sh")
 				
-                #DATABASE INSERTION
-				data = {'Uid': uid,
-						'Picture': pic,
-						'Date': dtime,
-						'mType': MOTION_TYPE_I2C}
-				sent = json.dumps(data)
-				result = firebase.post('/Detections/' + boxid, data)
+            #DATABASE INSERTION
+            data = {'Uid': boxid,'uPicture': imagetosend,'Date': dtime,'mType': MOTION_TYPE_I2C}
+            sent = json.dumps(data)
+            result = firebase.post('/Detections/', data)
 				
-				#IMAGE INSERTION
-				imagetosend = datetime.date.today().strftime("%-d%d%Y_%I%M%S%f.jpg")
-				zebraBlob = bucket.blob(imagetosend)
-				zebraBlob.upload_from_filename(filename=imagetosend)
-				
-				print(result)
-				print(imagetosend)
-				print("Data Uploaded Succesfully. Alert sent to database."
+	    #IMAGE INSERTION
+            zebraBlob = bucket.blob(imagetosend)
+            zebraBlob.upload_from_filename(filename=pic)
+            
+            print("Data Uploaded Succesfully. Alert sent to database.")
                 
-                # COOLDOWN / IMAGE HANDLING
-				os.system("./IMAGE.sh")
-                time.sleep(sleeptime) #Trigger Cooldown
-                print("COOLDOWN EXPIRE - %d SECONDS" %sleeptime)
+            # COOLDOWN / IMAGE HANDLING
+            os.system("./IMAGE.sh")
+            time.sleep(sleeptime) #Trigger Cooldown
+            print("COOLDOWN EXPIRE - %d SECONDS" %sleeptime)
                 
     # End Movement Check
                 
-	# Assign Values for Next Movement Check
+    # Assign Values for Next Movement Check
     xAcclafter = xAcclbefore
     yAcclafter = yAcclbefore
     zAcclafter = zAcclbefore
@@ -166,7 +162,8 @@ while True:
     if motion is 1: # if motion is HI
             
         print("MOTION DETECTED TOWARDS THE DEVICE")
-		dtime = strftime("%d %b %Y %H:%M:%S +0000", gmtime()) # detection timestamp (formatted)
+        dtime = strftime("%d %b %Y %H:%M:%S", gmtime()) # detection timestamp
+        imagetosend = strftime("%d%b%Y_%H:%M:%S.jpg", gmtime())
         GPIO.output(17,GPIO.LOW)
         time.sleep(0.1)
         GPIO.output(17,GPIO.HIGH)
@@ -184,28 +181,22 @@ while True:
         GPIO.output(17,GPIO.HIGH)
 		
         #CAMERA CALL / IMAGE SETUP
-                os.system("./CAMERA.sh")
-				
-                #DATABASE INSERTION
-				data = {'Uid': uid,
-						'Picture': pic,
-						'Date': dtime
-						'mType': MOTION_TYPE_GPIO}
+        os.system("./CAMERA.sh")
+        #DATABASE INSERTION
+        data = {'Uid': boxid,'Picture': imagetosend,'Date': dtime,'mType': MOTION_TYPE_GPIO}
 						
-				sent = json.dumps(data)
-				result = firebase.post('/Detections/' + boxid, data)
+        sent = json.dumps(data)
+        result = firebase.post('/Detections/', data)
+	
+	#IMAGE INSERTION
+        zebraBlob = bucket.blob(imagetosend)
+        zebraBlob.upload_from_filename(filename=pic)
 				
-				#IMAGE INSERTION
-				imagetosend = datetime.date.today().strftime("%-d%d%Y_%I%M%S%f.jpg")
-				zebraBlob = bucket.blob(imagetosend)
-				zebraBlob.upload_from_filename(filename=imagetosend)
-				
-				print(result)
-				print(imagetosend)
-				print("Data Uploaded Succesfully. Alert sent to database."
+        print("Data Uploaded Succesfully. Alert sent to database.")
         
         # COOLDOWN / IMAGE HANDLING
-		os.system("./IMAGE.sh")
+        os.system("./IMAGE.sh")
+        time.sleep(sleeptime)
         print("COOLDOWN EXPIRE - %d SECONDS" %sleeptime)
         
     # End Motion Check

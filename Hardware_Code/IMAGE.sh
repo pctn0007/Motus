@@ -3,7 +3,7 @@
 
 imagefile="$(date).jpg"
 
-cp /SECURITYIMAGE.jpg /MOTUSCaptures/$imagefile
+cp /MOTUSCaptures/$imagefile /SECURITYIMAGE.jpg
 rm SECURITYIMAGE.jpg
 
 # Return to Primary Program
