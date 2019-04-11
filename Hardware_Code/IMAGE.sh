@@ -1,9 +1,9 @@
 #!/bin/bash
 # This script handles saving images on the device and removal of bad images.
 
-imagefile="$(date).jpg"
+imagefile=`date '+%d/%m/%Y_%H:%M:%S'`
 
-cp /MOTUSCaptures/$imagefile /SECURITYIMAGE.jpg
+cp SECURITYIMAGE.jpg MOTUSCaptures
 rm SECURITYIMAGE.jpg
 
 # Return to Primary Program

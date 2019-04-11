@@ -11,7 +11,7 @@
 # Shell file to run camera function: CAMERA.sh
 # Shell file to run image handling: IMAGE.sh
 
-# UPDATED: 2019-03-18
+# UPDATED: 2019-04-11
 
 # DECLARATIONS AND INITIALIZATION ------------------------------------------
 
@@ -19,6 +19,8 @@ import smbus
 import time
 import os
 import datetime
+import signal
+import sys
 import random
 import json
 import RPi.GPIO as GPIO
@@ -28,27 +30,33 @@ from time import gmtime, strftime
 
 # MACROS -------------------------------------------------------------------
 
-sensitivity = 20 # The Accelerometers Sensetivity for Detection
+sensitivity = 10 # The Accelerometers Sensetivity for Detection
                  # 0 = MAX Sensitivity | Any positive value = less sensitive
 
-sleeptime = 20.0 # Suspend Time after Security Trigger
-                 # SECONDS.MILLISECONDS
-				 
-boxid = 'm1'   # unique motus bo id
-				 # UNIQUE BOX ID
+refreshrate = 1.0 # TIME BETWEEN CHECKS FOR SECURITY BREACHES
 
-uid =  'u1234' # unique user id via users table				 
-				 # UNIQUE USER ID
+sleeptime = 10.0 # Suspend Time after Security Trigger
+                 # SECONDS.MILLISECONDS
+
+dcheck = 0       #Prevention of Double Movement Detection 
 				 
+boxid = '1'      # unique Box ID
+				
 pic = 'SECURITYIMAGE.jpg' # snapshot file name
-							# TO BE UPLOADED TO DATABASE
+			# TO BE UPLOADED TO DATABASE
 							
 imagetosend = 'null' # initial image name
-						# RANDOMLY GENERATED THROUGH CODE
+	             # RANDOMLY GENERATED THROUGH CODE
 			
 # Motion types (i.e. case motion vs. stimuli motion).
 MOTION_TYPE_I2C = '0' #case
 MOTION_TYPE_GPIO = '1' #stimuli
+
+#INTERRUPT Catcher
+def signal_handler(sig, frame):
+    GPIO.output(17,GPIO.LOW)
+    sys.exit(0);
+signal.signal(signal.SIGINT, signal_handler)
 
 # Get I2C bus
 bus = smbus.SMBus(1)
@@ -108,7 +116,7 @@ while True:
 # IF MOVEMENT HAS BEEN DETECTED ON THE DEVICE ----------------------------------
     
     # Skips the Initialization values on first loop
-    if(xAcclafter is not 0 and yAcclafter is not 0 and zAcclafter is not 0):
+    if(dcheck is 0 and xAcclafter is not 0 and yAcclafter is not 0 and zAcclafter is not 0):
     
         xChange = xAcclbefore - xAcclafter
         yChange = yAcclbefore - yAcclafter
@@ -126,14 +134,12 @@ while True:
             GPIO.output(17,GPIO.HIGH)
             time.sleep(0.4)
             GPIO.output(17,GPIO.LOW)
-            time.sleep(0.4)
-            GPIO.output(17,GPIO.HIGH)
 				
             #CAMERA CALL
             os.system("./CAMERA.sh")
 				
             #DATABASE INSERTION
-            data = {'Uid': boxid,'uPicture': imagetosend,'Date': dtime,'mType': MOTION_TYPE_I2C}
+            data = {'BoxID': boxid,'Picture': imagetosend,'Date': dtime,'SType': MOTION_TYPE_I2C}
             sent = json.dumps(data)
             result = firebase.post('/Detections/', data)
 				
@@ -147,6 +153,9 @@ while True:
             os.system("./IMAGE.sh")
             time.sleep(sleeptime) #Trigger Cooldown
             print("COOLDOWN EXPIRE - %d SECONDS" %sleeptime)
+            dcheck = 1 # PREVENTION OF REPEAT
+    else:
+        dcheck = 0 # PREVENTION OF REPEAT
                 
     # End Movement Check
                 
@@ -177,13 +186,11 @@ while True:
         GPIO.output(17,GPIO.HIGH)
         time.sleep(0.1)
         GPIO.output(17,GPIO.LOW)
-        time.sleep(0.1)
-        GPIO.output(17,GPIO.HIGH)
 		
         #CAMERA CALL / IMAGE SETUP
         os.system("./CAMERA.sh")
         #DATABASE INSERTION
-        data = {'Uid': boxid,'Picture': imagetosend,'Date': dtime,'mType': MOTION_TYPE_GPIO}
+        data = {'BoxID': boxid,'Picture': imagetosend,'Date': dtime,'SType': MOTION_TYPE_GPIO}
 						
         sent = json.dumps(data)
         result = firebase.post('/Detections/', data)
@@ -201,4 +208,9 @@ while True:
         
     # End Motion Check
 
+    time.sleep(refreshrate) # REFRESH RATE OF CHECKS
+    GPIO.output(17,GPIO.LOW)
+    time.sleep(0.1)
+    GPIO.output(17,GPIO.HIGH)
+       
 # END PROGRAM ==================================================================
