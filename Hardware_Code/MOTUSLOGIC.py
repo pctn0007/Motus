@@ -126,6 +126,9 @@ while True:
            yChange >= sensitivity or yChange <= -sensitivity or
            zChange >= sensitivity or zChange <= -sensitivity):
             
+            #CAMERA CALL
+            os.system("./CAMERA.sh")
+            
             print("MOVEMENT DETECTED ON THE DEVICE")
             dtime = strftime("%d %b %Y %H:%M:%S", gmtime()) # detection timestamp
             imagetosend = (strftime("%d%b%Y_%H_%M_%S.jpg", gmtime()))
@@ -133,10 +136,7 @@ while True:
             time.sleep(0.4)
             GPIO.output(17,GPIO.HIGH)
             time.sleep(0.4)
-            GPIO.output(17,GPIO.LOW)
-				
-            #CAMERA CALL
-            os.system("./CAMERA.sh")
+            GPIO.output(17,GPIO.LOW)				
 				
             #DATABASE INSERTION
             data = {'BoxID': boxid,'Picture': imagetosend,'Date': dtime,'SType': MOTION_TYPE_I2C}
@@ -169,6 +169,9 @@ while True:
     motion = GPIO.input(4) # HI | LO assignment to motion
         
     if motion is 1: # if motion is HI
+        
+        #CAMERA CALL
+        os.system("./CAMERA.sh")
             
         print("MOTION DETECTED TOWARDS THE DEVICE")
         dtime = strftime("%d %b %Y %H:%M:%S", gmtime()) # detection timestamp
@@ -187,8 +190,6 @@ while True:
         time.sleep(0.1)
         GPIO.output(17,GPIO.LOW)
 		
-        #CAMERA CALL / IMAGE SETUP
-        os.system("./CAMERA.sh")
         #DATABASE INSERTION
         data = {'BoxID': boxid,'Picture': imagetosend,'Date': dtime,'SType': MOTION_TYPE_GPIO}
 						
