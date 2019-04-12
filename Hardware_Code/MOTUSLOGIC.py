@@ -42,7 +42,7 @@ dcheck = 0       #Prevention of Double Movement Detection
 				 
 boxid = '1'      # unique Box ID
 				
-pic = 'SECURITYIMAGE.jpg' # snapshot file name
+pic = '/home/pi/SECURITYIMAGE.jpg' # snapshot file name
 			# TO BE UPLOADED TO DATABASE
 							
 imagetosend = 'null' # initial image name
@@ -128,7 +128,7 @@ while True:
             
             print("MOVEMENT DETECTED ON THE DEVICE")
             dtime = strftime("%d %b %Y %H:%M:%S", gmtime()) # detection timestamp
-            imagetosend = strftime("%d%b%Y_%H:%M:%S.jpg", gmtime())
+            imagetosend = (strftime("%d%b%Y_%H_%M_%S.jpg", gmtime()))
             GPIO.output(17,GPIO.LOW)
             time.sleep(0.4)
             GPIO.output(17,GPIO.HIGH)
@@ -144,7 +144,7 @@ while True:
             result = firebase.post('/Detections/', data)
 				
 	    #IMAGE INSERTION
-            zebraBlob = bucket.blob(imagetosend)
+            zebraBlob = bucket.blob("Detections/" + imagetosend)
             zebraBlob.upload_from_filename(filename=pic)
             
             print("Data Uploaded Succesfully. Alert sent to database.")
@@ -172,7 +172,7 @@ while True:
             
         print("MOTION DETECTED TOWARDS THE DEVICE")
         dtime = strftime("%d %b %Y %H:%M:%S", gmtime()) # detection timestamp
-        imagetosend = strftime("%d%b%Y_%H:%M:%S.jpg", gmtime())
+        imagetosend = (strftime("%d%b%Y_%H_%M_%S.jpg", gmtime()))
         GPIO.output(17,GPIO.LOW)
         time.sleep(0.1)
         GPIO.output(17,GPIO.HIGH)
@@ -196,7 +196,7 @@ while True:
         result = firebase.post('/Detections/', data)
 	
 	#IMAGE INSERTION
-        zebraBlob = bucket.blob(imagetosend)
+        zebraBlob = bucket.blob("Detections/" + imagetosend)
         zebraBlob.upload_from_filename(filename=pic)
 				
         print("Data Uploaded Succesfully. Alert sent to database.")
